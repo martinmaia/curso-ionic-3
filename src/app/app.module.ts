@@ -15,6 +15,7 @@ import { IntroPageModule } from '../pages/intro/intro.module';
 
 import { HttpModule } from '@angular/http';
 import { MovieProvider } from '../providers/movie/movie';
+import { ApiKeyProvider } from '../providers/api-key/api-key';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MovieProvider } from '../providers/movie/movie';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MovieProvider
+    MovieProvider,
+    ApiKeyProvider
   ]
 })
 export class AppModule {}
