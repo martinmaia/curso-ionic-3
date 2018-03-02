@@ -19,6 +19,8 @@ import { MovieProvider } from '../../providers/movie/movie';
 })
 export class FeedPage {
 
+  public lista_filmes: Array<any>;
+
   public objeto_feed = {
     titulo: "Marty McFly",
     data: "01/03/2018",
@@ -38,9 +40,10 @@ export class FeedPage {
 
   ionViewDidLoad() {
 
-    this.movieProvider.getLastestMovies().subscribe(
+    this.movieProvider.getPopularMovies().subscribe(
       data => {
-        console.log(data);
+        const objeto_retorno = JSON.parse((data as any)._body);
+        this.lista_filmes = objeto_retorno.results;
       }, error => {
         console.log(error);
       }

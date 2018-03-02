@@ -13,19 +13,26 @@ import { ApiKeyClass } from '../../app/api.key';
 @Injectable()
 export class MovieProvider {
 
-  private apiKey;
+  private apiKey: any;
   private baseApiPath = "https://api.themoviedb.org/3";
 
   constructor(public http: Http) {
     console.log('Hello MovieProvider Provider');
   }
 
-  public getLastestMovies() {
+  public getPopularMovies() {
     this.getApiKey();
-    return this.http.get(this.baseApiPath + "/movie/latest?api_key=" + this.apiKey);
+    return this.http.get(this.baseApiPath + "/movie/popular?api_key=" + this.apiKey +
+      "&language=pt-BR");
   }
 
-  private getApiKey(){
+  public getUpcomingMovies() {
+    this.getApiKey();
+    return this.http.get(this.baseApiPath + "/movie/upcoming?api_key=" + this.apiKey +
+      "&language=pt-BR");
+  }
+
+  private getApiKey() {
     this.apiKey = ApiKeyClass.apiKey;
   }
 
