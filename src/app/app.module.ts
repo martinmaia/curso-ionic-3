@@ -15,6 +15,9 @@ import { HttpModule } from '@angular/http';
 import { MovieProvider } from '../providers/movie/movie';
 import { ApiKeyClass } from './api.key';
 import { ConfigProvider } from '../providers/config/config';
+import { ConfiguracoesPageModule } from '../pages/configuracoes/configuracoes.module';
+import { PerfilPageModule } from '../pages/perfil/perfil.module';
+import { SobrePageModule } from '../pages/sobre/sobre.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { ConfigProvider } from '../providers/config/config';
     IonicModule.forRoot(MyApp),
     FeedPageModule,
     IntroPageModule,
+    SobrePageModule,
+    ConfiguracoesPageModule,
+    PerfilPageModule,
     HttpModule
   ],
   bootstrap: [IonicApp],
