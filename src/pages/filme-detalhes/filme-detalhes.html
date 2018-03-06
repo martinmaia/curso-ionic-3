@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Detalhes do filme</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card *ngIf="detalhes_filme">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img [src]="'https://image.tmdb.org/t/p/w500/' + detalhes_filme.poster_path">
+      </ion-avatar>
+      <h2 class="feed_title">{{ detalhes_filme.original_title }}</h2>
+      <p class="feed_date">{{ detalhes_filme.release_date }}</p>
+    </ion-item>
+
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + detalhes_filme.backdrop_path">
+
+    <ion-card-content>
+      <p>{{ detalhes_filme.overview }}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{ detalhes_filme.vote_count }} pessoas gostaram</div>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>

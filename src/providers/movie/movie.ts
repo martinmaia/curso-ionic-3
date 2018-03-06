@@ -32,6 +32,12 @@ export class MovieProvider {
       "&language=pt-BR");
   }
 
+  public getMovieDetails(idMovie) {
+    this.getApiKey();
+    return this.http.get(this.baseApiPath + "/movie/"+ idMovie +"?api_key=" + this.apiKey +
+      "&language=pt-BR");
+  }
+
   private getApiKey() {
     this.apiKey = ApiKeyClass.apiKey;
   }
