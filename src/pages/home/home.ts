@@ -21,6 +21,10 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+    this.getUpcomingMovies();
+  }
+
+  getUpcomingMovies() {
 
     this.movieProvider.getUpcomingMovies().subscribe(
       data => {

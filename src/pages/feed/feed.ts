@@ -20,16 +20,7 @@ import { MovieProvider } from '../../providers/movie/movie';
 export class FeedPage {
 
   public lista_filmes: Array<any>;
-
-  public objeto_feed = {
-    titulo: "Marty McFly",
-    data: "01/03/2018",
-    descricao: "Estou criando um App em Ionic 3",
-    curtir: "340 curtidas",
-    comentarios: "233 comentários",
-    hora: "3h atrás"
-  }
-
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
