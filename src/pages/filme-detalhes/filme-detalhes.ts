@@ -30,7 +30,7 @@ export class FilmeDetalhesPage {
 
   abreCarregando() {
     this.loader = this.loadingCtrl.create({
-      content: "Carregando filmes...",
+      content: "Carregando detalhes...",
     });
     this.loader.present();
   }

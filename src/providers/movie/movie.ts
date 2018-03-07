@@ -17,25 +17,22 @@ export class MovieProvider {
   private baseApiPath = "https://api.themoviedb.org/3";
 
   constructor(public http: Http) {
-    
+
   }
 
-  public getPopularMovies() {
+  public getPopularMovies(page = 1) {
     this.getApiKey();
-    return this.http.get(this.baseApiPath + "/movie/popular?api_key=" + this.apiKey +
-      "&language=pt-BR");
+    return this.http.get(`${this.baseApiPath}/movie/popular?page=${page}&api_key=${this.apiKey}&language=pt-BR`);
   }
 
-  public getUpcomingMovies() {
+  public getUpcomingMovies(page = 1) {
     this.getApiKey();
-    return this.http.get(this.baseApiPath + "/movie/upcoming?api_key=" + this.apiKey +
-      "&language=pt-BR");
+    return this.http.get(`${this.baseApiPath}/movie/upcoming?page=${page}&api_key=${this.apiKey}&language=pt-BR`);
   }
 
   public getMovieDetails(idMovie) {
     this.getApiKey();
-    return this.http.get(this.baseApiPath + "/movie/"+ idMovie +"?api_key=" + this.apiKey +
-      "&language=pt-BR");
+    return this.http.get(`${this.baseApiPath}/movie/${idMovie}?api_key=${this.apiKey}&language=pt-BR`);
   }
 
   private getApiKey() {

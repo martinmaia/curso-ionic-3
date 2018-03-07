@@ -24,6 +24,8 @@ export class FeedPage {
   private loader;
   public refresher;
   public isResfreshing: boolean = false;
+  public page = 1;
+  public infiniteScroll;
 
   constructor(
     public navCtrl: NavController,
@@ -40,9 +42,17 @@ export class FeedPage {
     this.ionViewDidLoad();
   }
 
+  doInfinite(infiniteScroll) {
+
+    this.page++;
+    this.infiniteScroll = infiniteScroll;
+    this.getPopularMovies(true);
+
+  }
+
   abreCarregando() {
     this.loader = this.loadingCtrl.create({
-      content: "Carregando filmes...",
+      content: "Carregando populares...",
     });
     this.loader.present();
   }
@@ -59,14 +69,20 @@ export class FeedPage {
     this.navCtrl.push(FilmeDetalhesPage, { id: idMovie });
   }
 
-  getPopularMovies() {
+  getPopularMovies(newpage: boolean = false) {
 
     this.abreCarregando();
 
-    this.movieProvider.getPopularMovies().subscribe(
+    this.movieProvider.getPopularMovies(this.page).subscribe(
       data => {
         const objeto_retorno = JSON.parse((data as any)._body);
-        this.lista_filmes = objeto_retorno.results;
+        if (newpage) {
+          this.lista_filmes = this.lista_filmes.concat(objeto_retorno.results);
+          this.infiniteScroll.complete();
+        }
+        else {
+          this.lista_filmes = objeto_retorno.results;
+        }
         this.fecharCarregando();
       }, error => {
         console.log(error);

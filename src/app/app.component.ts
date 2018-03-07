@@ -26,7 +26,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
 
       let config = configProvider.getConfigData();
-      console.log(config);
       if(config == null){
         this.rootPage = IntroPage;
         configProvider.setConfigData(false);

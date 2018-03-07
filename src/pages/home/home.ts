@@ -16,6 +16,8 @@ export class HomePage {
   public loader;
   public refresher;
   public isResfreshing: boolean = false;
+  public page = 1;
+  public infiniteScroll;
 
   constructor(
     public navCtrl: NavController,
@@ -31,13 +33,21 @@ export class HomePage {
     this.ionViewDidLoad();
   }
 
+  doInfinite(infiniteScroll) {
+
+    this.page++;
+    this.infiniteScroll = infiniteScroll;
+    this.getUpcomingMovies(true);
+
+  }
+
   ionViewDidLoad() {
     this.getUpcomingMovies();
   }
 
   abreCarregando() {
     this.loader = this.loadingCtrl.create({
-      content: "Carregando filmes...",
+      content: "Carregando lançamentos...",
     });
     this.loader.present();
   }
@@ -50,14 +60,20 @@ export class HomePage {
     this.navCtrl.push(FilmeDetalhesPage, { id: idMovie });
   }
 
-  getUpcomingMovies() {
+  getUpcomingMovies(newpage: boolean = false) {
 
     this.abreCarregando();
 
-    this.movieProvider.getUpcomingMovies().subscribe(
+    this.movieProvider.getUpcomingMovies(this.page).subscribe(
       data => {
         const objeto_retorno = JSON.parse((data as any)._body);
-        this.proximos_filmes = objeto_retorno.results;
+        if (newpage) {
+          this.proximos_filmes = this.proximos_filmes.concat(objeto_retorno.results);
+          this.infiniteScroll.complete();
+        }
+        else {
+          this.proximos_filmes = objeto_retorno.results;
+        }
         this.fecharCarregando();
       }, error => {
         this.fecharCarregando();
